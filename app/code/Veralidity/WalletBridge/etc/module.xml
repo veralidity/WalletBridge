@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Veralidity, LLC
+ *
+ * @package    Veralidity
+ * @category   WalletBridge
+ * @copyright  Copyright © 2023 Veralidity, LLC
+ * @license    https://www.veralidity.com/license/
+ * @author     Veralidity, LLC <veralidity@protonmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+	<module name="Veralidity_WalletBridge"/>
+</config>

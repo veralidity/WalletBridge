@@ -1,0 +1,124 @@
+
+.wallet-switcher-options {
+    .lib-dropdown();
+}
+
+#switcher-wallet-nav {
+    margin-right: 0 !important;
+}
+
+#switcher-wallet-trigger-nav:after {
+    content: none;
+}
+
+#switcher-wallet-trigger-nav:not(.field-tooltip) {
+    margin: 0;
+}
+#switcher-wallet-trigger-nav strong {
+    display: none;
+}
+
+.wallet-switcher-options .action.toggle:after {
+    content: none;
+}
+
+#switcher-wallet-trigger-nav {
+    margin-left: 15px;
+    
+}
+
+#switcher-wallet-trigger-nav:before {
+    content: "\e02a";
+    font-family: 'Simple-Line-Icons';
+    color: #53A2BF !important;
+}
+#switcher-wallet-trigger-nav:hover:before {
+    color: #000000 !important;
+}
+
+#switcher-wallet-trigger-nav .active:after {
+
+}
+
+#cardano-connect-container li {
+    padding: 8px 8px 8px 42px;
+    background-size: 24px 24px;
+    background-position: left 8px bottom 50%;;
+    background-repeat: no-repeat;
+}
+
+.gerowallet-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/gerowallet-logo.png") !important;
+}
+
+.yoroi-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/yoroi-logo.png") !important;
+}
+
+.lace-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/lace-logo.png") !important;
+}
+
+.flint-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/flint-logo.png") !important;
+}
+
+.typhon-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/typhon-logo.png") !important;
+}
+
+.eternl-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/eternl-logo.png") !important;
+}
+
+.nami-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/nami-logo.png") !important;
+}
+
+.exodus-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/exodus-logo.png") !important;
+}
+
+.nufi-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/nufi-logo.png") !important;
+}
+
+.nautilus-logo {
+    background-image: url("../Veralidity_WalletBridge/images/wallets/nautilus-logo.png") !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .my-wallet-label:after {
+        content: "\e02a";
+        font-family: 'Simple-Line-Icons';
+        margin-left: 15px;
+    }
+
+    #switcher-wallet-trigger-nav {
+        margin-left: 0;
+    }
+
+    /*.nav-sections .switcher-trigger strong {
+        display: block;
+    }*/
+
+    #switcher-wallet-trigger-nav strong {
+        display: block;
+    }
+
+    #switcher-wallet-trigger-nav:before {
+        content: none;
+    }
+
+    .wallet-switcher-options .action.toggle.active:after {
+        content: none;
+    }
+}
+
+@media all and (min-width: 768px),print {
+
+    .theme-pearl .page-wrapper .page-header-v4 .panel.header .header_right {
+        flex-direction: unset !important;
+    }
+
+}

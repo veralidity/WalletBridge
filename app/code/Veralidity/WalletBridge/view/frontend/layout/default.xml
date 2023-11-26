@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Veralidity, LLC
+ *
+ * @package    Veralidity
+ * @category   WalletBridge
+ * @copyright  Copyright © 2023 Veralidity, LLC
+ * @license    https://www.veralidity.com/license/
+ * @author     Veralidity, LLC <veralidity@protonmail.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.right">
+            <block class="Magento\Directory\Block\Currency" name="walletbridge" after="currency" template="Veralidity_WalletBridge::wallet-connect.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="store.settings">
+            <block class="Magento\Directory\Block\Currency" name="walletbridge_mobile" after="currency" template="Veralidity_WalletBridge::wallet-connect.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

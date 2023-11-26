@@ -1,0 +1,22 @@
+{
+    "name": "veralidity/module-walletbridge",
+    "description": "Bridge for Cardano and Ergo Web Browser Wallets",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Mitchell Robles Jr",
+            "email": "veralidity@protonmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Veralidity\\WalletBridge\\": ""
+        }
+    }
+}

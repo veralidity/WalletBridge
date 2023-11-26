@@ -1,0 +1,45 @@
+<?php
+/**
+ * Veralidity, LLC
+ *
+ * @package    Veralidity
+ * @category   WalletBridge
+ * @copyright  Copyright © 2023 Veralidity, LLC
+ * @license    https://www.veralidity.com/license/
+ * @author     Veralidity, LLC <veralidity@protonmail.com>
+ *
+ * @var \Veralidity\WalletBridge\Block\WalletConnect $block
+ */
+
+?>
+
+<div class="switcher wallet switcher-wallet" id="switcher-wallet-nav">
+    <strong class="label switcher-label">
+        <span class="my-wallet-label">My Wallet</span>
+    </strong>
+    <div class="actions dropdown options switcher-options wallet-switcher-options">
+        <div class="action toggle switcher-trigger" id="switcher-wallet-trigger-nav" data-toggle="dropdown" data-trigger-keypress-button="true" aria-haspopup="true" aria-expanded="false" role="button" tabindex="0" data-mage-init='{"dropdown":{}}'>
+            <strong>
+                <span>Connect Wallet</span>
+            </strong>
+        </div>
+        <ul class="dropdown switcher-dropdown wallet-dropdown cardano-connect-container" id="cardano-connect-container" data-target="dropdown" aria-hidden="true" data-mage-init='{"cardanoConnectWallet": {}}'>
+            <?php /* <li class="switcher-option">
+                <a href="#" data-post="">Wallet 1</a>
+            </li>
+            <li class="switcher-option">
+                <a href="#" data-post="">Wallet 2</a>
+            </li>
+            <li class="switcher-option">
+                <a href="#" data-post="">Wallet 3</a>
+            </li>
+            <li class="switcher-option">
+                <a href="#" data-post="">Wallet 4</a>
+            </li>
+            <li class="switcher-option">
+                <a href="#" data-post="">Wallet 5</a>
+            </li> */ ?>
+        </ul>
+    </div>
+</div>
+<?php /* <div class="cardano-connect-container" id="cardano-connect-container" data-mage-init='{"cardanoConnectWallet": {}}'>Connect Wallet</div> */?>
