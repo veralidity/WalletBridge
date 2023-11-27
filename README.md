@@ -11,6 +11,9 @@ This extension includes a heavily modified version of https://github.com/cardano
 
 This extension adds a wallet icon to the Magento 2 frontends header next to the shopping cart icon and currency switcher. When the wallet icon is clicked on a drop down menu appears using native Magento functionality similar to the currency switcher. The dropdown contains a list of all available wallets and it allows you to connect and disconnect to your preferred web-browser wallet. No other wallet functionality is incorporated yet, other than connecting and disconnecting. However, when you connect to a Cardano supported wallet, there's Javascript logic incorporated that changes the currency to ₳ ADA (Cardano) so customers can shop using ₳ ADA as the selected and displayed currency. The ₳ ADA currency and price precision functionality comes from several other Magento extensions that we've developed which will be made available to the public at a later date.
 
-The wallet icon and dropdown are also aded to the "Settings" tab within the movile menu underneath the Currency Switcher options.
+The wallet icon and dropdown are also added to the "Settings" tab within the mobile menu underneath the Currency Switcher options.
 
 This is a work in progress and more features, and fixes are to be added later.
+
+We created a short demo video that shows some of this functionality in use alongside some of the other features we've discussed:
+https://www.youtube.com/watch?v=lbqLd3a-5GQ
