@@ -14,6 +14,3 @@ This extension adds a wallet icon to the Magento 2 frontends header next to the 
 The wallet icon and dropdown are also added to the "Settings" tab within the mobile menu underneath the Currency Switcher options.
 
 This is a work in progress and more features, and fixes are to be added later.
-
-We created a short demo video that shows some of this functionality in use alongside some of the other features we've discussed:
-https://www.youtube.com/watch?v=lbqLd3a-5GQ
