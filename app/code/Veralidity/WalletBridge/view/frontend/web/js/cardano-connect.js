@@ -1,4 +1,4 @@
-console.log("CardanoConnect module loaded");
+//console.log("CardanoConnect module loaded");
 
 define([
     'domReady!',
@@ -57,7 +57,7 @@ define([
         },
 
         updateDropdownMenu: function () {
-            console.log("Updating dropdown menu");
+            //console.log("Updating dropdown menu");
             //const isMobile = CardanoConnectWithWalletCore.checkIsMobile();
             const availableWallets = CardanoConnectWithWalletCore.estimateAvailableWallets(
                 this.config.supportedWallets,
@@ -124,25 +124,25 @@ define([
         },
 
         handleEnabledWallet: function (enabledWallet) {
-            console.log("handleEnabledWallet called", enabledWallet);
+            //console.log("handleEnabledWallet called", enabledWallet);
             this.state.enabledWallet = enabledWallet;
             this.updateDropdownMenu();
         },
 
         handleInstalledWalletExtensions: function (installedExtensions) {
-            console.log("handleInstalledWalletExtensions called", installedExtensions);
+            //console.log("handleInstalledWalletExtensions called", installedExtensions);
             this.state.installedExtensions = installedExtensions;
             this.updateDropdownMenu();
         },
 
         handleStakeAddress: function (stakeAddress) {
-            console.log("handleStakeAddress called", stakeAddress);
+            //console.log("handleStakeAddress called", stakeAddress);
             this.state.stakeAddress = stakeAddress;
             this.updateDropdownMenu();
         },
 
         handleConnected: function (isConnected) {
-            console.log("handleConnected called", isConnected);
+            //console.log("handleConnected called", isConnected);
             this.state.isConnected = isConnected;
             if (isConnected) {
                 this.updateDropdownMenu();
@@ -220,7 +220,7 @@ define([
         }
     };
 
-    console.log("CardanoConnect module setup complete");
+    //console.log("CardanoConnect module setup complete");
     return function(config, element) {
         cardanoConnectWallet.init();
         // Any additional logic for component initialization
