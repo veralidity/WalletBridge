@@ -1,15 +1,15 @@
+console.log("CardanoConnect module loaded");
 
 define([
-    'jquery',
     'domReady!',
     'CardanoConnectWithWalletCore',
     'cardanoConnectWallet'
-], function ($, dom, CardanoConnectWithWalletCore, cardanoConnectWallet) {
+], function (dom, CardanoConnectWithWalletCore, cardanoConnectWallet) {
     'use strict';
 
-    cardanoConnectWallet = {
-        cardanoConnectWallet: function () {
-            var config = {
+    var cardanoConnectWallet = {
+        init: function () {
+            this.config = {
                 label: 'Connect Wallet',
                 showEnabledWalletIcon: true,
                 showUnavailableWallets: false,
@@ -19,7 +19,6 @@ define([
                     'flint',
                     'gerowallet',
                     'lace',
-                    'nautilus',
                     'nami',
                     'nufi',
                     'typhon',
@@ -29,146 +28,88 @@ define([
                 message: undefined,
             };
 
-            var that = this;
-            this.parent = document.getElementsByClassName('cardano-connect-container');
-
-            this.showEnabledWalletIcon = config.showEnabledWalletIcon;
-            this.message = config.message;
-            this.supportedWallets = config.supportedWallets;
-            this.showUnavailableWallets =
-                config.showUnavailableWallets ||
-                CardanoConnectWithWalletCore.UnavailableWalletVisibility.SHOW_UNAVAILABLE_ON_MOBILE;
-            this.alwaysVisibleWallets = config.alwaysVisibleWallets;
+            this.state = {
+                isEnabled: false,
+                isConnected: false,
+                isConnecting: false,
+                stakeAddress: null,
+                enabledWallet: null,
+                usedAddresses: null,
+                unusedAddresses: null,
+                installedExtensions: [],
+                accountBalance: null,
+                lastConnectedWallet: null,
+                meerkatAddress: null
+            };
 
             this.wallet = CardanoConnectWithWalletCore.Wallet;
-
-            this.isEnabled = false;
-            this.isConnected = false;
-            this.isConnecting = false;
-            this.stakeAddress = null;
-            this.enabledWallet = null;
-            this.usedAddresses = null;
-            this.unusedAddresses = null;
-            this.installedExtensions = [];
-            this.accountBalance = null;
-            this.lastConnectedWallet = null;
-            this.meerkatAddress = null;
-            this.label = config.label;
-
-            // for (let i = 0; i < this.parent.length; i++) {
-            //     let walletList = document.createElement('li');
-            //     walletList.className = 'switcher-option connect-wallet-menu-item';
-            //     this.parent[i].appendChild(walletList);
-            // }
-
-            this.wallet.addEventListener('enabledWallet', (enabledWallet) => {
-                this.enabledWallet = enabledWallet;
-                this.updateDropdownMenu();
-            });
-
-            this.wallet.addEventListener('installedWalletExtensions', (installedExtensions) => {
-                this.installedExtensions = installedExtensions;
-                this.updateDropdownMenu();
-            });
-
-            this.wallet.addEventListener('stakeAddress', (stakeAddress) => {
-                this.stakeAddress = stakeAddress;
-                this.updateDropdownMenu();
-            });
-
-            this.wallet.addEventListener('connected', (isConnected) => {
-                this.isConnected = isConnected;
-                this.updateDropdownMenu();
-                this.changeCurrency();
-            });
-
-            this.wallet.startInjectWalletListener();
+            this.parent = document.getElementsByClassName('cardano-connect-container');
+            this.addEventListeners();
             this.updateDropdownMenu();
-
-
         },
-        createMenuItem: function (label, onClick, id = null, walletClass = null) {
 
-            let walletList = document.createElement('li');
-            walletList.className = 'switcher-option connect-wallet-menu-item' + walletClass;
-
-            if (typeof onClick === 'function') {
-                walletList.onclick = onClick;
-            }
-
-            if (typeof id === 'string') {
-                walletList.id = id;
-            }
-
-            walletList.appendChild(document.createTextNode(label));
-            return walletList;
+        addEventListeners: function () {
+            this.wallet.addEventListener('enabledWallet', this.handleEnabledWallet.bind(this));
+            this.wallet.addEventListener('installedWalletExtensions', this.handleInstalledWalletExtensions.bind(this));
+            this.wallet.addEventListener('stakeAddress', this.handleStakeAddress.bind(this));
+            this.wallet.addEventListener('connected', this.handleConnected.bind(this));
+            this.wallet.startInjectWalletListener();
         },
 
         updateDropdownMenu: function () {
-            const isMobile = CardanoConnectWithWalletCore.checkIsMobile();
+            console.log("Updating dropdown menu");
+            //const isMobile = CardanoConnectWithWalletCore.checkIsMobile();
             const availableWallets = CardanoConnectWithWalletCore.estimateAvailableWallets(
-                this.supportedWallets,
-                this.showUnavailableWallets,
-                this.alwaysVisibleWallets,
-                this.installedExtensions
+                this.config.supportedWallets,
+                this.config.showUnavailableWallets,
+                this.config.alwaysVisibleWallets,
+                this.state.installedExtensions
             );
-
-            //const buttonTitle = this.stakeAddress && this.isConnected ? this.getStakeAddressTitle() : this.label;
 
             for (let i = 0; i < this.parent.length; i++) {
                 this.parent[i].innerHTML = '';
 
-                this.parent[i].appendChild(
-                    this.createMenuItem(
-                        'nautilus',
-                        () => { this.wallet.connectToWallet('nautilus'); },
-                        null,
-                        this.getWalletClass('nautilus')
-                    )
-                );
-
                 if (availableWallets.length === 0) {
                     const label = `Please install a wallet browser extension (${CardanoConnectWithWalletCore.formatSupportedWallets(
-                        this.supportedWallets
+                        this.config.supportedWallets
                     )} are supported)`;
 
                     this.parent[i].appendChild(
                         this.createMenuItem(label, null, 'connect-wallet-hint')
                     );
-                } else if (this.stakeAddress !== null) {
-                    if (typeof this.message === 'string') {
+                } else if (this.state.stakeAddress !== null) {
+                    if (typeof this.config.message === 'string') {
                         this.parent[i].appendChild(
                             this.createMenuItem(
                                 'Sign Message',
-                                () => { this.wallet.signMessage(this.message); }
+                                () => { this.wallet.signMessage(this.config.message); }
                             )
                         );
                     }
 
-                    if (this.showEnabledWalletIcon && this.isConnected && this.enabledWallet) {
+                    if (this.config.showEnabledWalletIcon && this.state.isConnected && this.state.enabledWallet) {
                         this.parent[i].appendChild(
                             this.createMenuItem(
-                                'Disconnect ' + this.enabledWallet,
+                                'Disconnect ' + this.state.enabledWallet,
                                 () => { this.wallet.disconnect(); },
                                 null,
-                                this.getWalletClass(this.enabledWallet)
+                                this.getWalletClass(this.state.enabledWallet)
                             )
                         );
 
-                    } else if (!this.showEnabledWalletIcon && this.isConnected && this.enabledWallet) {
+                    } else if (!this.config.showEnabledWalletIcon && this.state.isConnected && this.state.enabledWallet) {
                         this.parent[i].appendChild(
                             this.createMenuItem(
-                                'Disconnect ' + this.enabledWallet,
+                                'Disconnect ' + this.state.enabledWallet,
                                 () => { this.wallet.disconnect(); },
                                 null,
-                                this.getWalletClass(this.enabledWallet)
+                                this.getWalletClass(this.state.enabledWallet)
                             )
                         );
                     }
 
                 } else {
                     for (const extension of availableWallets) {
-                        console.log(extension);
                         this.parent[i].appendChild(
                             this.createMenuItem(
                                 extension,
@@ -182,40 +123,106 @@ define([
             }
         },
 
+        handleEnabledWallet: function (enabledWallet) {
+            console.log("handleEnabledWallet called", enabledWallet);
+            this.state.enabledWallet = enabledWallet;
+            this.updateDropdownMenu();
+        },
+
+        handleInstalledWalletExtensions: function (installedExtensions) {
+            console.log("handleInstalledWalletExtensions called", installedExtensions);
+            this.state.installedExtensions = installedExtensions;
+            this.updateDropdownMenu();
+        },
+
+        handleStakeAddress: function (stakeAddress) {
+            console.log("handleStakeAddress called", stakeAddress);
+            this.state.stakeAddress = stakeAddress;
+            this.updateDropdownMenu();
+        },
+
+        handleConnected: function (isConnected) {
+            console.log("handleConnected called", isConnected);
+            this.state.isConnected = isConnected;
+            if (isConnected) {
+                this.updateDropdownMenu();
+                //this.changeCurrency();
+            }
+        },
+
+        createMenuItem: function (label, onClick, id, walletClass) {
+            let walletListItem = document.createElement('li');
+            walletListItem.className = 'switcher-option connect-wallet-menu-item';
+
+            // Append additional class if provided
+            if (walletClass) {
+                walletListItem.className += ' ' + walletClass;
+            }
+
+            // Set the ID if provided
+            if (typeof id === 'string') {
+                walletListItem.id = id;
+            }
+
+            // Attach the click event handler if provided
+            if (typeof onClick === 'function') {
+                walletListItem.onclick = onClick;
+            }
+
+            // Append the text label
+            walletListItem.appendChild(document.createTextNode(label));
+
+            return walletListItem;
+        },
+
         changeCurrency: function () {
             // Define the target currency code
             var targetCurrencyCode = 'ADA';
 
             // Get the currently selected currency code
-            var currentCurrencyCode = $('#switcher-currency-trigger strong').attr('class').split('-')[1];
+            var switcherCurrencyTrigger = document.querySelector('#switcher-currency-trigger strong');
+            var currentCurrencyCode = switcherCurrencyTrigger ? switcherCurrencyTrigger.className.split('-')[1] : null;
 
             // Check if the current currency is not the target currency
-            if (currentCurrencyCode !== targetCurrencyCode) {
+            if (currentCurrencyCode && currentCurrencyCode !== targetCurrencyCode) {
                 // Find the anchor tag for the target currency
-                var targetCurrencyLink = $('li.currency-' + targetCurrencyCode + ' a');
+                var targetCurrencyLink = document.querySelector('li.currency-' + targetCurrencyCode + ' a');
 
                 // Check if the target currency link exists and is not already selected
-                if (targetCurrencyLink.length && !targetCurrencyLink.parent().hasClass('selected')) {
+                if (targetCurrencyLink && !targetCurrencyLink.parentNode.classList.contains('selected')) {
                     // Trigger a click event on the target currency link
-                    targetCurrencyLink.trigger('click');
+                    targetCurrencyLink.click();
                 }
             }
         },
 
         getWalletClass: function (wallet) {
+            // This method returns a CSS class based on the wallet name
+            // The class is used for styling the wallet icon or representation in the UI
             return ' ' + wallet + '-logo';
         },
 
         getStakeAddressTitle: function () {
-            return `${this.stakeAddress.slice(0, 12)}...`;
+            // This method formats the stake address for display
+            if (this.state.stakeAddress) {
+                // Returns a shortened version of the stake address
+                return `${this.state.stakeAddress.slice(0, 12)}...`;
+            }
+            return 'No Stake Address';
         },
 
         addCss: function (element, style) {
-            for (const property in style)
-                element.style[property] = style[property];
+            for (const property in style) {
+                if (style.hasOwnProperty(property)) {
+                    element.style[property] = style[property];
+                }
+            }
         }
-
     };
 
-    return cardanoConnectWallet;
+    console.log("CardanoConnect module setup complete");
+    return function(config, element) {
+        cardanoConnectWallet.init();
+        // Any additional logic for component initialization
+    };
 });

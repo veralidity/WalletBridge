@@ -1,19 +1,28 @@
-define([
-    'jquery'
-], function ($) {
+define([], function () {
     'use strict';
 
     return function () {
-        var targetElement = $('#switcher-wallet-trigger-nav'); // Replace with your element's selector
+        var targetElement = document.getElementById('switcher-wallet-trigger-nav'); // Replace with your element's ID
 
-        targetElement.on('click touchstart', function () {
-            $(this).toggleClass('active');
-            $('.wallet-switcher-options').toggleClass('active');
+        targetElement.addEventListener('click', toggleElements);
+        targetElement.addEventListener('touchstart', toggleElements);
+
+        function toggleElements() {
+            this.classList.toggle('active');
+            var walletSwitcherOptions = document.querySelectorAll('.wallet-switcher-options');
+            walletSwitcherOptions.forEach(function(elem) {
+                elem.classList.toggle('active');
+            });
+
             // Toggle aria-expanded attribute
-            var ariaExpanded = $(this).attr('aria-expanded') === 'false';
-            $(this).attr('aria-expanded', !ariaExpanded);
-            var ariaHidden = $('.wallet-dropdown').attr('aria-hidden') === 'true';
-            $('.wallet-dropdown').attr('aria-hidden', !ariaHidden);
-        });
+            var ariaExpanded = this.getAttribute('aria-expanded') === 'false';
+            this.setAttribute('aria-expanded', ariaExpanded.toString());
+
+            var walletDropdowns = document.querySelectorAll('.wallet-dropdown');
+            walletDropdowns.forEach(function(dropdown) {
+                var ariaHidden = dropdown.getAttribute('aria-hidden') === 'true';
+                dropdown.setAttribute('aria-hidden', !ariaHidden);
+            });
+        }
     };
 });
