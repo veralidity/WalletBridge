@@ -1,16 +1,44 @@
-
 Veralidity_WalletBridge for Adobe Commerce Magento 2 OpenSource
 
-This is an initial Proof of Concept Magento 2 extension that incorporates CIP-30 wallets for Cardano & Ergo blockchains using Javascript, and implemented the "Magento way".
 
-This extension includes a heavily modified version of https://github.com/cardano-foundation/cardano-connect-with-wallet/blob/main/html/cardano-connect.js and a slightly modified version of https://cardano-foundation.github.io/cardano-connect-with-wallet/bundle-latest/index.js
+Introduction
 
-- The changes to cardano-connect.js include gutting out the drop down menu functionality, simplifying the code, adds proper formatting, and is written to align with coding standards.
-  - The new dropdown functionality is rendered using data-init-mage functionality: https://developer.adobe.com/commerce/frontend-core/javascript/init/
-- The changes made to latest.js are unMinifying the code for human readability, adding in and changing various logos due to issues with the incorrect logos being displayed for wallets, and adding in new wallets.
+Welcome to the Veralidity_WalletBridge, a cutting-edge extension for Adobe Commerce Magento 2 OpenSource. This extension represents an innovative Proof of Concept that seamlessly integrates CIP-30 wallets for the Cardano & Ergo blockchains into Magento 2, leveraging the power of JavaScript. It's crafted meticulously to align with Magento's best practices, utilizing requirejs and data-mage-init.
 
-This extension adds a wallet icon to the Magento 2 frontends header next to the shopping cart icon and currency switcher. When the wallet icon is clicked on a drop down menu appears using native Magento functionality similar to the currency switcher. The dropdown contains a list of all available wallets and it allows you to connect and disconnect to your preferred web-browser wallet. No other wallet functionality is incorporated yet, other than connecting and disconnecting. However, when you connect to a Cardano supported wallet, there's Javascript logic incorporated that changes the currency to ₳ ADA (Cardano) so customers can shop using ₳ ADA as the selected and displayed currency. The ₳ ADA currency and price precision functionality comes from several other Magento extensions that we've developed which will be made available to the public at a later date.
 
-The wallet icon and dropdown are also added to the "Settings" tab within the mobile menu underneath the Currency Switcher options.
+Key Features and Modifications
 
-This is a work in progress and more features, and fixes are to be added later.
+Cardano Connect Integration: Incorporates a heavily adapted version of the script from the Cardano Foundation's cardano-connect-with-wallet. https://github.com/cardano-foundation/cardano-connect-with-wallet/blob/main/html/cardano-connect.js
+
+UI Enhancement: Overhauls the original dropdown menu functionality, streamlining it to produce HTML list items directly within the script, thereby simplifying the code and enhancing readability.
+
+Magento Native Dropdown: Implements the new dropdown feature using Magento's data-mage-init functionality, as detailed in Adobe's developer guide.
+
+Bundle Update: Refines bundle-latest/index.js from the Cardano Foundation, which includes improvements like unminifying the code for enhanced clarity, updating wallet logos for accuracy, and extending wallet support. https://cardano-foundation.github.io/cardano-connect-with-wallet/bundle-latest/index.js
+
+
+Frontend Integration
+
+Wallet Icon in Header: Adds a stylish wallet icon to the Magento 2 frontend header, adjacent to the shopping cart and currency switcher icons.
+
+Interactive Dropdown Menu: Features an interactive dropdown menu, triggered by the wallet icon, which lists all available wallets, enabling users to effortlessly connect or disconnect to their browser-based wallets.
+
+Currency Switching Logic: Integrates JavaScript logic to switch the shopping currency to ₳ ADA (Cardano) upon connecting to a Cardano-supported wallet, offering a seamless shopping experience in ₳ ADA.
+
+Mobile Menu Compatibility: Ensures a cohesive user experience by adding the wallet icon and dropdown to the "Settings" tab in the mobile menu, positioned below the Currency Switcher options.
+
+
+Additional Extensions
+
+₳ ADA Currency Precision: Leverages additional Magento extensions developed by our team to enable currency precision for ₳ ADA. These extensions will be released to the public soon.
+
+
+Current Status and Future Plans
+
+This extension is an ongoing project with continuous enhancements and feature additions planned. Future updates will introduce more wallet functionalities and improvements.
+
+Note: This extension is part of a series of contributions aiming to bridge the gap between e-commerce and blockchain technologies. We welcome feedback, suggestions, and contributions from the community to further enhance this project.
+
+Stay tuned for more updates and features!
+
+Thank you for exploring Veralidity_WalletBridge. We're excited to be at the forefront of integrating blockchain technology into the e-commerce space, and we look forward to your support and feedback!
