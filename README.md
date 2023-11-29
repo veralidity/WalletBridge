@@ -2,7 +2,10 @@
 
 ## Introduction
 
-Welcome to the **Veralidity_WalletBridge**, a dynamic extension for Adobe Commerce Magento 2 OpenSource. This innovative Proof of Concept seamlessly integrates CIP-30 wallets for the Cardano blockchain into Magento 2. It's designed to leverage the best practices of Magento, utilizing LESS, JavaScript, `requirejs`, and `data-mage-init`.
+Welcome to the **Veralidity_WalletBridge**, a dynamic extension for Adobe Commerce Magento 2 OpenSource. This innovative Proof of Concept seamlessly integrates various wallets for the Cardano blockchain into Magento 2. It's designed to leverage the best practices of Magento, utilizing LESS, JavaScript, `requirejs`, and `data-mage-init`.
+
+### PoC
+This is a Proof of Concept, and is not finalized, nor does it incorporate everything that the original authors had implemented. This version does not take into acount mobile wallets yet, and therefore you should hide the wallet icon on mobile via CSS or build upon what we've started and make it better. If you encounter issues we're more than happy to help to an extent, but this is provided as-is, and without gaurantees or warantees. Use at your own risk. With that, have fun, cheers.
 
 ## Key Features and Customization Advantages
 
