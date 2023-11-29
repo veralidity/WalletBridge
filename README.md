@@ -33,6 +33,7 @@ Welcome to the **Veralidity_WalletBridge**, a dynamic extension for Adobe Commer
 ## Ongoing Development and Future Enhancements
 
 - **Currency Precision**: Integrates additional Magento extensions for accurate ₳ ADA currency handling.
+- **Although the UI works on mobile, we need to handle the mobile wallet integration itself, so if integrating this into your project you will want to build upon this or hide the wallet icon via CSS for mobile only so you don't confuse people as to why they can't connect to a wallet.
 - **Continuous Improvement**: Committed to continuous enhancements and feature additions, including expanding wallet functionalities.
 
 ---
