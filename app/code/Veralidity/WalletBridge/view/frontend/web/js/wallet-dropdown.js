@@ -2,7 +2,7 @@ define([], function () {
     'use strict';
 
     return function () {
-        var targetElement = document.getElementById('switcher-wallet-trigger-nav'); // Replace with your element's ID
+        var targetElement = document.getElementById('switcher-wallet-trigger-nav');
 
         targetElement.addEventListener('click', toggleElements);
         targetElement.addEventListener('touchstart', toggleElements);
